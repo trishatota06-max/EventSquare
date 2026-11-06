@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventSquare | Endless Experiences</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="particles"></div>
+
+<nav>
+ <div class="logo">✦ Event<span>Square</span></div>
+ <div class="navlinks">
+  <a href="#home">Home</a>
+  <a href="#discover">Discover</a>
+  <a href="#bookings">My Bookings</a>
+  <a href="#host">Host Event</a>
+  <a href="#inquiry">Contact</a>
+ </div>
+ <button class="btn" onclick="document.getElementById('bookings').scrollIntoView()">My Bookings ↗</button>
+</nav>
+
+<section class="hero" id="home">
+ <div>
+  <span class="eyebrow">✦ YOUR CITY, YOUR MOMENTS</span>
+  <h1>Discover, Book &<br><span class="gradient">Experience Events.</span></h1>
+  <p>From concerts to creative workshops, find exciting experiences near you and be part of something special. One square. Endless memories.</p>
+  <div class="heroactions">
+   <button class="btn" onclick="document.getElementById('discover').scrollIntoView()">Explore Events →</button>
+   <button class="btn outline" onclick="document.getElementById('bookings').scrollIntoView()">▣ View My Bookings</button>
+  </div>
+  <p style="font-size:13px">✨ Discover experiences. Make memories. Meet your people.</p>
+ </div>
+ <div class="heroart">
+  <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1100&q=85" alt="Concert crowd">
+  <div class="floatcard one">🎵 <b>Live Music</b><br><small>Feel the moment</small></div>
+  <div class="floatcard two">🎨 <b>Creative Workshops</b><br><small>Make something amazing</small></div>
+  <div class="artcaption">Your next unforgettable moment ✨</div>
+ </div>
+</section>
+
+<div class="searchbar">
+ <input id="search" placeholder="⌕ Search events, experiences..." oninput="filterEvents()">
+ <select id="city" onchange="filterEvents()">
+  <option value="all">📍 All Cities</option>
+  <option>Bhubaneswar</option><option>Kolkata</option><option>Delhi</option><option>Mumbai</option>
+ </select>
+ <select id="month" onchange="filterEvents()">
+  <option value="all">Any Date</option><option value="Nov">November 2026</option>
+  <option value="Dec">December 2026</option><option value="Jan">January 2027</option><option value="Feb">February 2027</option>
+ </select>
+ <button class="btn" onclick="resetFilters()">Reset</button>
+</div>
+
+<section class="section" id="discover">
+ <div class="sectionhead"><div class="kicker">THE CITY IS ALIVE</div><h2>Find your kind of fun.</h2><p class="sub">Little adventures. Big memories. All in one place.</p></div>
+ <div class="categories">
+  <button class="cat active" onclick="setCategory('all',this)"><span class="emoji">✨</span><b>All Events</b></button>
+  <button class="cat" onclick="setCategory('Music',this)"><span class="emoji">🎵</span><b>Music</b></button>
+  <button class="cat" onclick="setCategory('Art',this)"><span class="emoji">🎨</span><b>Art & Craft</b></button>
+  <button class="cat" onclick="setCategory('Food',this)"><span class="emoji">🍜</span><b>Food</b></button>
+  <button class="cat" onclick="setCategory('Wellness',this)"><span class="emoji">🧘</span><b>Wellness</b></button>
+  <button class="cat" onclick="setCategory('Party',this)"><span class="emoji">🎉</span><b>Party & More</b></button>
+ </div>
+ <div class="events" id="eventList"></div>
+ <p id="noResults" style="display:none;text-align:center;padding:30px;color:var(--muted)">No events found. Try another search ✨</p>
+</section>
+
+<div class="banner" id="host">
+ <div>
+  <div class="kicker">FOR THE MEMORY-MAKERS</div>
+  <h2>Your idea deserves a <span class="gradient">spotlight.</span></h2>
+  <p>Host a workshop, launch a gig, or gather your community. Turn your ideas into unforgettable experiences.</p>
+  <button class="btn" onclick="openHost()">Create an Event ↗</button>
+ </div>
+ <img src="https://images.unsplash.com/photo-1517457373958-b7ade9b8f7b8?w=900&q=85" alt="Event gathering">
+</div>
+
+<section class="section" id="how">
+ <div class="sectionhead">
+  <div class="kicker">NO COMPLICATED PLANS</div>
+  <h2>Three steps to a good time.</h2>
+  <p class="sub">The hardest part? Choosing what to do.</p>
+ </div>
+ <div class="steps">
+  <div class="step"><span class="stepnum">01</span><h3>Find Your Feeling</h3><p>Explore events by category, city, or whatever you're curious about.</p></div>
+  <div class="step"><span class="stepnum">02</span><h3>Save Your Seat</h3><p>Choose your tickets, fill in a few details, and you're on the list.</p></div>
+  <div class="step"><span class="stepnum">03</span><h3>Show Up & Shine</h3><p>Check your booking dashboard and go make a memory worth keeping.</p></div>
+ </div>
+</section>
+
+<section class="dashboard" id="bookings">
+ <div class="dashhead">
+  <div>
+   <div class="kicker">YOUR PERSONAL SPACE</div>
+   <h2 style="margin:5px 0">My Booking Dashboard</h2>
+   <p class="sub">All your reservations, together in one place.</p>
+  </div>
+  <span id="bookingCount" class="eyebrow">0 BOOKINGS</span>
+ </div>
+ <div class="tabs">
+  <button class="tab active" onclick="showBookings('upcoming',this)">Upcoming Events</button>
+  <button class="tab" onclick="showBookings('past',this)">Past Events</button>
+ </div>
+ <div id="bookingList"><p class="sub">Your bookings will appear here after you reserve a spot.</p></div>
+</section>
+
+<section class="inquiry" id="inquiry">
+ <div>
+  <div class="kicker">WE'RE HERE TO HELP</div>
+  <h2>Have a question?</h2>
+  <p>Need help with a booking, event rules, refunds, or hosting? Send us an inquiry.</p>
+  <p>✉ hello@eventsquare.example<br>⏰ Mon–Sat · 10 AM–6 PM</p>
+ </div>
+ <form onsubmit="sendInquiry(event)">
+  <input required placeholder="Your name">
+  <input type="email" required placeholder="Email address">
+  <select required>
+   <option value="">Choose inquiry type</option>
+   <option>Booking support</option><option>Event information</option>
+   <option>Refund / cancellation</option><option>Host an event</option><option>Other</option>
+  </select>
+  <textarea required placeholder="Type your message..."></textarea>
+  <button class="btn">Send Inquiry ↗</button>
+ </form>
+</section>
+
+<div class="newsletter">
+ <div class="kicker">A LITTLE JOY IN YOUR INBOX</div>
+ <h2>Good plans. No spam.</h2>
+ <p>Get the city's most exciting happenings, once a week.</p>
+ <form class="emailbox" onsubmit="newsletter(event)">
+  <input type="email" required placeholder="Your email address">
+  <button class="btn">I'm In ✨</button>
+ </form>
+</div>
+
+<footer>
+ <div><div class="logo">✦ Event<span>Square</span></div><p>One Square. Endless Experiences.</p></div>
+ <div class="footerlinks">
+  <a href="#discover">Discover</a><a href="#host">Organisers</a>
+  <a href="#bookings">My Bookings</a><a href="#inquiry">Help & Contact</a>
+ </div>
+ <p>© 2026 EventSquare · Made for moments that matter.</p>
+</footer>
+
+<div class="modal" id="modal">
+ <div class="modalbox">
+  <button class="close" onclick="closeModal()">×</button>
+  <div id="modalContent"></div>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
